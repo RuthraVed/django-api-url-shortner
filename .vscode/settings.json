@@ -1,0 +1,28 @@
+{
+    "editor.formatOnSave": true,
+    "python.pythonPath": "anaconda3/envs/InfraCloud-Task/bin/python",
+    "python.sortImports.args": [
+        "--profile=black",
+    ],
+    "python.formatting.provider": "black",
+    "python.formatting.blackArgs": [
+        "--line-length=180"
+    ],
+    "[python]": {
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": true
+        }
+    },
+    // Django Extension
+    "files.associations": {
+        "**/*.html": "html",
+        "**/templates/**/*.html": "django-html",
+        "**/templates/**/*": "django-txt",
+        "**/requirements{/**,*}.{txt,in}": "pip-requirements"
+    },
+    "files.exclude": {
+        "**/__pycache__": true,
+        "**/.pytest_cache": true,
+        "**/__init__.py": true,
+    }
+}
