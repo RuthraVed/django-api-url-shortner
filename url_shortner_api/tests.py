@@ -31,9 +31,6 @@ class Test_Link(TestCase):
     def test_check_redirection(self):
         pass
 
-    def test_non_creation_of_duplicate_original_links(self):
-        pass
-
 
 class Test_LinkAPI(APITestCase):
     def test_api_create_short_link(self):
@@ -42,3 +39,16 @@ class Test_LinkAPI(APITestCase):
         response = self.client.post(url, data, format="json")
         self.assertIn(settings.HOST_URL, response.data["shortened_link"])
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+    def test_non_creation_of_duplicate_original_links(self):
+        # Creating 1st short url
+        data = {"original_link": LONG_URL}
+        url = reverse("url_shortner_api:create_shortlink")
+        response_1 = self.client.post(url, data, format="json")
+
+        # Creating 2nd short url, with same long url
+        data = {"original_link": LONG_URL}
+        url = reverse("url_shortner_api:create_shortlink")
+        response_2 = self.client.post(url, data, format="json")
+
+        self.assertEqual(response_1.data["shortened_link"], response_2.data["shortened_link"])
