@@ -1,0 +1,4 @@
+Commands To Run Tests
+----------------------
+> coverage run --omit='*/venv/*' manage.py test
+> coverage html
