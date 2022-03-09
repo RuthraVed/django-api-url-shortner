@@ -1,9 +1,11 @@
 from django.conf import settings
-from django.shortcuts import redirect
+from django.shortcuts import render, redirect
 from django.views import View
 from rest_framework import status
 from rest_framework.generics import CreateAPIView, ListAPIView
 from rest_framework.response import Response
+from django.http import HttpResponse
+from url_shortner_api.forms import ShortenerForm
 
 from url_shortner_api.models import Link
 from url_shortner_api.serializers import LinkSerializer
@@ -38,3 +40,29 @@ class Redirector(View):
         shortener_link = settings.HOST_URL + "/" + self.kwargs["shortener_link"]
         redirect_link = Link.objects.filter(shortened_link=shortener_link).first().original_link
         return redirect(redirect_link)
+
+# Create your views here.
+
+def home_view(request):
+    
+    template = 'home.html'    
+    context = {}
+
+    # Empty form
+    context['form'] = ShortenerForm()
+
+    if request.method == 'GET':
+        return render(request, template, context)
+
+    elif request.method == 'POST':
+        used_form = ShortenerForm(request.POST)
+
+        if used_form.is_valid():
+            link_object = used_form.save()
+            context['new_url']  = link_object.shortened_link
+            context['long_url'] = link_object.original_link 
+            return render(request, template, context)
+        else:
+            context['errors'] = used_form.errors
+
+        return render(request, template, context)
