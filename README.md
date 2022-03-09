@@ -43,13 +43,19 @@ $ python3 manage.py runserver
 
 ## API Endpoints
 
-1. View All URLs 
+1. Swagger Documentation - 
+```
+http://localhost:8000/swagger 
+```
+
+2. View All URLs 
 ```
 http://localhost:8000/api/
 ```
-2. Create Short Link - 
+
+3. Create Short Link - 
 ```
-http://localhost:8000/api/create - 
+http://localhost:8000/api/create 
 ```
 
 -- Abhishek Dev
