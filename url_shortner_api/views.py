@@ -36,7 +36,7 @@ class ShortenerCreateApiView(CreateAPIView):
 
 
 class Redirector(View):
-    def get(self, request, shortener_link, *args, **kwargs):
+    def get(self, *args, **kwargs):
         shortener_link = settings.HOST_URL + "/" + self.kwargs["shortener_link"]
         redirect_link = Link.objects.filter(shortened_link=shortener_link).first().original_link
         return redirect(redirect_link)
