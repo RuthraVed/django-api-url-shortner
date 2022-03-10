@@ -7,6 +7,7 @@ from django.db import models
 AVAILABLE_CHARS = ascii_letters + digits
 STR_LENGTH = 7
 
+
 class Link(models.Model):
     original_link = models.URLField(max_length=1000)
     shortened_link = models.URLField(blank=True, null=True, editable=False)

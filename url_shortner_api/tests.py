@@ -1,9 +1,9 @@
 from django.conf import settings
 from django.contrib.auth.models import User
-from django.test import Client, TestCase
+from django.test import TestCase
 from django.urls import reverse
 from rest_framework import status
-from rest_framework.test import APIClient, APITestCase
+from rest_framework.test import APITestCase
 
 from url_shortner_api.models import Link
 
